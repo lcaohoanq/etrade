@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: etrade
+    
 
   datasource:
     url: jdbc:h2:mem:mydb
@@ -15,7 +16,7 @@ spring:
   h2:
     console:
       enabled: true
-      
+  
 logging:
   level:
     root: info

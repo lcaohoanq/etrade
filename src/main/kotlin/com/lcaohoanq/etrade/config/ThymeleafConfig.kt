@@ -17,7 +17,7 @@ class ThymeleafConfig {
     @Bean
     fun templateResolver(): ClassLoaderTemplateResolver {
         val templateResolver = ClassLoaderTemplateResolver()
-        templateResolver.prefix = "static/"
+        templateResolver.prefix = "templates/"
         templateResolver.suffix = ".html"
         templateResolver.setTemplateMode("HTML")
         return templateResolver

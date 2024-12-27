@@ -5,8 +5,6 @@ import com.lcaohoanq.etrade.base.exception.DataAlreadyExistException
 import com.lcaohoanq.etrade.base.exception.DataNotFoundException
 import com.lcaohoanq.etrade.base.exception.DataWrongFormatException
 import com.lcaohoanq.etrade.base.exception.OutOfStockException
-import com.lcaohoanq.etrade.domain.localization.LocalizationUtils
-import com.lcaohoanq.etrade.domain.localization.MessageKey
 import jakarta.mail.MessagingException
 import lombok.extern.slf4j.Slf4j
 import mu.KotlinLogging
@@ -28,7 +26,6 @@ import java.util.*
 @Slf4j
 @RestControllerAdvice
 class GlobalExceptionHandler(
-    private val localizationUtils: LocalizationUtils
 ) {
     private val logger = KotlinLogging.logger {}
 
@@ -36,7 +33,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleDataNotFoundException(e: DataNotFoundException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.DATA_NOT_FOUND))
+            .message("Data not found")
             .reason(e.message)
             .statusCode(HttpStatus.NOT_FOUND.value())
             .isSuccess(false)
@@ -58,7 +55,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleIOException(e: IOException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.INTERNAL_SERVER_ERROR))
+            .message("Internal server error")
             .reason(e.message)
             .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
             .isSuccess(false)
@@ -69,7 +66,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
     fun handleFileTooLargeException(e: FileTooLargeException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.UPLOAD_IMAGES_FILE_LARGE))
+            .message("File too large")
             .reason(e.message)
             .statusCode(HttpStatus.PAYLOAD_TOO_LARGE.value())
             .isSuccess(false)
@@ -80,7 +77,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     fun handleUnsupportedMediaTypeException(e: UnsupportedMediaTypeException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.UPLOAD_IMAGES_FILE_MUST_BE_IMAGE))
+            .message("Unsupported media type")
             .reason(e.message)
             .statusCode(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value())
             .isSuccess(false)
@@ -102,7 +99,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleNullPointerException(e: NullPointerException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.EXCEPTION_NULL_POINTER))
+            .message("Null pointer exception")
             .reason(e.message)
             .statusCode(HttpStatus.BAD_REQUEST.value())
             .isSuccess(false)
@@ -114,7 +111,7 @@ class GlobalExceptionHandler(
     fun handleException(e: Exception): ApiError<Any> {
         logger.error("Internal server error: ", e)
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.INTERNAL_SERVER_ERROR))
+            .message("Internal server error")
             .reason(e.message)
             .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
             .isSuccess(false)
@@ -125,7 +122,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleGenerateDataException(e: GenerateDataException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage("exception.generate_data_error"))
+            .message("Error generating data")
             .reason(e.message)
             .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
             .isSuccess(false)
@@ -138,11 +135,7 @@ class GlobalExceptionHandler(
         e: InvalidApiPathVariableException
     ): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(
-                localizationUtils.getLocalizedMessage(
-                    MessageKey.EXCEPTION_INVALID_API_PATH_VARIABLE
-                )
-            )
+            .message("Invalid path variable")
             .reason(e.message)
             .statusCode(HttpStatus.BAD_REQUEST.value())
             .isSuccess(false)
@@ -184,7 +177,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleMalformDataException(e: MalformDataException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.EXCEPTION_MALFORMED_DATA))
+            .message("Malformed data")
             .reason(e.message)
             .statusCode(HttpStatus.BAD_REQUEST.value())
             .isSuccess(false)
@@ -195,9 +188,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleMalformBehaviourException(e: MalformBehaviourException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(
-                localizationUtils.getLocalizedMessage(MessageKey.EXCEPTION_MALFORMED_BEHAVIOUR)
-            )
+            .message("Malformed behaviour")
             .reason(e.message)
             .statusCode(HttpStatus.BAD_REQUEST.value())
             .isSuccess(false)
@@ -211,7 +202,7 @@ class GlobalExceptionHandler(
         request: WebRequest
     ): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.EXCEPTION_PERMISSION_DENIED))
+            .message("Access Denied")
             .reason("Insufficient privileges to access this resource")
             .statusCode(HttpStatus.FORBIDDEN.value())
             .isSuccess(false)
@@ -248,7 +239,7 @@ class GlobalExceptionHandler(
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handlePasswordWrongFormatException(e: DataWrongFormatException): ApiError<Any> {
         return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.WRONG_FORMAT))
+            .message("Data wrong format")
             .reason(e.message)
             .statusCode(HttpStatus.BAD_REQUEST.value())
             .isSuccess(false)
@@ -283,7 +274,7 @@ class GlobalExceptionHandler(
     ): ResponseEntity<ApiError<Any>> {
         logger.error("DataIntegrityViolationException: ", ex)
         val apiError = ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage("exception.data_integrity_violation"))
+            .message("Data integrity violation")
             .reason(ex.mostSpecificCause.message)
             .statusCode(HttpStatus.CONFLICT.value())
             .isSuccess(false)
