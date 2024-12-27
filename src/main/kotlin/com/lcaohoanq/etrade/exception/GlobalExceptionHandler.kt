@@ -7,7 +7,6 @@ import com.lcaohoanq.etrade.base.exception.DataWrongFormatException
 import com.lcaohoanq.etrade.base.exception.OutOfStockException
 import com.lcaohoanq.etrade.domain.localization.LocalizationUtils
 import com.lcaohoanq.etrade.domain.localization.MessageKey
-import io.jsonwebtoken.ExpiredJwtException
 import jakarta.mail.MessagingException
 import lombok.extern.slf4j.Slf4j
 import mu.KotlinLogging
@@ -15,8 +14,6 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException
-import org.springframework.security.access.AccessDeniedException
-import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.validation.FieldError
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
@@ -246,35 +243,7 @@ class GlobalExceptionHandler(
             )
             .build()
     }
-
-    @ExceptionHandler(ExpiredJwtException::class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    fun handleExpiredJwtException(e: ExpiredJwtException?, request: WebRequest): ApiError<Any> {
-        return ApiError.errorBuilder<Any>()
-            .message("Token Expired")
-            .reason("The provided authentication token has expired")
-            .statusCode(HttpStatus.UNAUTHORIZED.value())
-            .isSuccess(false)
-            .data(
-                java.util.Map.of(
-                    "timestamp", System.currentTimeMillis(),
-                    "path", (request as ServletWebRequest).request.requestURI
-                )
-            )
-            .build()
-    }
-
-    @ExceptionHandler(BadCredentialsException::class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun handleBadCredentialsException(e: BadCredentialsException): ApiError<Any> {
-        return ApiError.errorBuilder<Any>()
-            .message(localizationUtils.getLocalizedMessage(MessageKey.EXCEPTION_BAD_CREDENTIALS))
-            .reason(e.message)
-            .statusCode(HttpStatus.BAD_REQUEST.value())
-            .isSuccess(false)
-            .build()
-    }
-
+    
     @ExceptionHandler(DataWrongFormatException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handlePasswordWrongFormatException(e: DataWrongFormatException): ApiError<Any> {

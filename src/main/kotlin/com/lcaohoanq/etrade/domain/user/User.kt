@@ -10,9 +10,6 @@ import com.lcaohoanq.etrade.enums.UserStatus
 import jakarta.persistence.*
 import jakarta.validation.constraints.Email
 import org.hibernate.envers.Audited
-import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDateTime
 
 @Audited
@@ -74,29 +71,7 @@ data class User(
     @Column(name = "last_login_timestamp")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     var lastLoginTimestamp: LocalDateTime? = null,
-) : BaseEntity(), UserDetails {
-
-    //Spring Security
-    override fun getAuthorities(): Collection<GrantedAuthority> {
-        val authorityList = mutableListOf<SimpleGrantedAuthority>()
-        role?.let {
-            authorityList.add(SimpleGrantedAuthority("ROLE_${it.name}"))
-        }
-        return authorityList
-    }
-
-    override fun getPassword(): String {
-        return this.hashedPassword ?: ""
-    }
-
-    override fun getUsername(): String {
-        return email
-    }
-
-    override fun isAccountNonExpired(): Boolean = true
-    override fun isAccountNonLocked(): Boolean = true
-    override fun isCredentialsNonExpired(): Boolean = true
-    override fun isEnabled(): Boolean = true
+) : BaseEntity() {
 
     enum class ActivityStatus {
         ONLINE, OFFLINE

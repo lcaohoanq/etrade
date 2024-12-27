@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import com.lcaohoanq.etrade.constant.Regex
-import com.lcaohoanq.etrade.domain.token.TokenPort.TokenResponse
 import com.lcaohoanq.etrade.domain.user.UserPort
 import com.lcaohoanq.etrade.enums.Country
 import com.lcaohoanq.etrade.enums.Currency
@@ -89,7 +88,6 @@ interface AuthPort {
     @JsonPropertyOrder("token", "user")
     @JsonInclude(Include.NON_NULL)
     data class LoginResponse(
-        val token: TokenResponse,
         val user: UserPort.UserResponse
     )
 
