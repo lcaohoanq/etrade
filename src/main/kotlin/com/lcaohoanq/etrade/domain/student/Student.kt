@@ -1,6 +1,6 @@
-package com.lcaohoanq.kotlinbasics.domain.student
+package com.lcaohoanq.etrade.domain.student
 
-import com.lcaohoanq.kotlinbasics.base.BaseEntity
+import com.lcaohoanq.etrade.base.BaseEntity
 import jakarta.persistence.Entity
 import java.time.LocalDateTime
 import java.util.*

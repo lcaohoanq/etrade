@@ -1,7 +1,7 @@
-package com.lcaohoanq.kotlinbasics.mapper
+package com.lcaohoanq.etrade.mapper
 
-import com.lcaohoanq.kotlinbasics.domain.student.Student
-import com.lcaohoanq.kotlinbasics.domain.student.StudentPort
+import com.lcaohoanq.etrade.domain.student.Student
+import com.lcaohoanq.etrade.domain.student.StudentPort
 import org.mapstruct.Mapper
 
 @Mapper(componentModel = "spring")

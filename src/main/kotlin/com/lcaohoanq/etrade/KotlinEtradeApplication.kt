@@ -1,13 +1,13 @@
-package com.lcaohoanq.kotlinbasics
+package com.lcaohoanq.etrade
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
-@ComponentScan(basePackages = ["com.lcaohoanq.kotlinbasics.mapper"])
-class KotlinbasicsApplication
+@ComponentScan(basePackages = ["com.lcaohoanq.etrade.mapper"])
+class KotlinEtradeApplication
 
 fun main(args: Array<String>) {
-    runApplication<KotlinbasicsApplication>(*args)
+    runApplication<KotlinEtradeApplication>(*args)
 }

@@ -1,8 +1,0 @@
-2024-12-21 17:42:25 [main] INFO  c.l.k.KotlinbasicsApplicationKt - Starting KotlinbasicsApplicationKt using Java 22.0.2 with PID 182719 (/media/SSD-DATA/PROJECT/Kotlin/kotlinbasics-springboot/target/classes started by lcaohoanq in /media/SSD-DATA/PROJECT/Kotlin/kotlinbasics-springboot)
-2024-12-21 17:42:25 [main] DEBUG c.l.k.KotlinbasicsApplicationKt - Running with Spring Boot v3.4.1, Spring v6.2.1
-2024-12-21 17:42:25 [main] INFO  c.l.k.KotlinbasicsApplicationKt - No active profile set, falling back to 1 default profile: "default"
-2024-12-21 17:42:30 [main] INFO  c.l.k.KotlinbasicsApplicationKt - Started KotlinbasicsApplicationKt in 4.723 seconds (process running for 5.393)
-2024-12-21 17:43:05 [main] INFO  c.l.k.KotlinbasicsApplicationKt - Starting KotlinbasicsApplicationKt using Java 22.0.2 with PID 184114 (/media/SSD-DATA/PROJECT/Kotlin/kotlinbasics-springboot/target/classes started by lcaohoanq in /media/SSD-DATA/PROJECT/Kotlin/kotlinbasics-springboot)
-2024-12-21 17:43:05 [main] DEBUG c.l.k.KotlinbasicsApplicationKt - Running with Spring Boot v3.4.1, Spring v6.2.1
-2024-12-21 17:43:05 [main] INFO  c.l.k.KotlinbasicsApplicationKt - No active profile set, falling back to 1 default profile: "default"
-2024-12-21 17:43:09 [main] INFO  c.l.k.KotlinbasicsApplicationKt - Started KotlinbasicsApplicationKt in 4.877 seconds (process running for 5.639)

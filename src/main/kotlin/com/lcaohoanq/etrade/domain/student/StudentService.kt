@@ -1,7 +1,6 @@
-package com.lcaohoanq.kotlinbasics.domain.student
+package com.lcaohoanq.etrade.domain.student
 
-import com.lcaohoanq.kotlinbasics.mapper.StudentMapper
-import lombok.RequiredArgsConstructor
+import com.lcaohoanq.etrade.mapper.StudentMapper
 import org.springframework.stereotype.Service
 import java.util.*
 

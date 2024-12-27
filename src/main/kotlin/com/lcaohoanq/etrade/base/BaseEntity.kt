@@ -1,4 +1,4 @@
-package com.lcaohoanq.kotlinbasics.base
+package com.lcaohoanq.etrade.base
 
 import jakarta.persistence.*
 import java.time.LocalDateTime

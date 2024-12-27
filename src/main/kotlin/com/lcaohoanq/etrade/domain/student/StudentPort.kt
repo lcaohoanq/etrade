@@ -1,4 +1,4 @@
-package com.lcaohoanq.kotlinbasics.domain.student
+package com.lcaohoanq.etrade.domain.student
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDateTime
