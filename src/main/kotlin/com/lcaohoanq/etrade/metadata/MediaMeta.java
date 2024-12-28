@@ -29,7 +29,7 @@ public class MediaMeta extends BaseMedia {
     private Long fileSize;
 
     @JsonProperty("image_url")
-    private String imageUrl;
+    private String imageUrl = "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg";
 
     @JsonProperty("video_url")
     private String videoUrl;

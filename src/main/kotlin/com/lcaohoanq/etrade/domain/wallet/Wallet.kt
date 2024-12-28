@@ -11,7 +11,7 @@ import org.hibernate.envers.Audited
 @Table(name = "wallets")
 data class Wallet(
     @Column(name = "balance", nullable = false)
-    var balance: Float? = null,
+    var balance: Float = 0f,
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)

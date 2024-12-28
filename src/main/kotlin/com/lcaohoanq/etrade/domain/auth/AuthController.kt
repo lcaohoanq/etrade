@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
-class AuthController {
+class AuthController(
+    private val authService: IAuthService
+) {
 
     val validAccount = mutableListOf(
         AuthPort.UserLoginDTO("admin@gmail.com", "1"),

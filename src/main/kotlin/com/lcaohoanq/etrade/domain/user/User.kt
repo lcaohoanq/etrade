@@ -22,7 +22,7 @@ data class User(
 
     @Column(name = "password", length = 200)
     @JsonProperty("password")
-    var hashedPassword: String? = null,
+    var hashedPassword: String = "",
 
     var name: String? = null,
 
@@ -31,11 +31,11 @@ data class User(
 
     @Column(name = "is_active", columnDefinition = "boolean default true")
     @JsonProperty("is_active")
-    var isActive: Boolean = false,
+    var isActive: Boolean = true,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    var status: UserStatus? = null,
+    var status: UserStatus =  UserStatus.UNVERIFIED,
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "activity_status")
@@ -60,7 +60,7 @@ data class User(
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "role")
-    var role: UserRole? = null,
+    var role: UserRole = UserRole.MEMBER,
 
     @Column(name = "preferred_language")
     var preferredLanguage: String? = null,
