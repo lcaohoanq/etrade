@@ -11,9 +11,4 @@ class ContactController {
         return "contact"
     }
     
-    @GetMapping("/contact-us")
-    fun contactUs(): String {
-        return "contact-us"
-    }
-    
 }

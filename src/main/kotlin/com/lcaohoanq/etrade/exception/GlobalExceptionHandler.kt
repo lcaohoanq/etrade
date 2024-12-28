@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.context.request.ServletWebRequest
 import org.springframework.web.context.request.WebRequest
+import org.springframework.web.servlet.resource.NoResourceFoundException
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder
+import org.springframework.web.servlet.view.RedirectView
 import java.io.IOException
 import java.util.*
 
@@ -28,6 +30,12 @@ import java.util.*
 class GlobalExceptionHandler(
 ) {
     private val logger = KotlinLogging.logger {}
+
+    @ExceptionHandler(NoResourceFoundException::class)
+    fun handleNoResourceFoundException(e: NoResourceFoundException): RedirectView {
+        logger.error { "Resource not found: ${e.message}" }
+        return RedirectView("/404")
+    }
 
     @ExceptionHandler(DataNotFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)

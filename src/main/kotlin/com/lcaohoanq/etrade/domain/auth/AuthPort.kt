@@ -18,37 +18,37 @@ interface AuthPort {
 
     data class AccountRegisterDTO(
         @JsonProperty("name")
-        @NotBlank(message = "Name is required") val name: String,
+        @NotBlank(message = "Name is required") val name: String = "",
 
         @JsonProperty("email")
-        @Email(message = "Email is invalid") val email: String,
+        @Email(message = "Email is invalid") val email: String = "",
 
         @JsonProperty("phone_number")
         @Pattern(regexp = Regex.PHONE_NUMBER_REGEX, message = "Phone number is invalid")
-        @NotBlank(message = "Phone number is required") val phoneNumber: String,
+        @NotBlank(message = "Phone number is required") val phoneNumber: String = "",
 
-        @JsonProperty("gender") val gender: Gender,
+        @JsonProperty("gender") val gender: Gender = Gender.OTHER,
 
         @JsonProperty("password")
         @Pattern(
             regexp = Regex.PASSWORD_REGEX,
             message = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
         )
-        @NotBlank(message = "Password is required") val password: String,
+        @NotBlank(message = "Password is required") val password: String = "",
 
         @JsonProperty("confirm_password")
-        @NotBlank(message = "Confirm password is required") val confirmPassword: String,
+        @NotBlank(message = "Confirm password is required") val confirmPassword: String = "",
 
         @JsonProperty("date_of_birth")
-        val dateOfBirth: String,
+        val dateOfBirth: String = "",
 
         @JsonProperty("preferred_language")
         @JsonFormat(shape = JsonFormat.Shape.STRING)
-        val preferredLanguage: Country,
+        val preferredLanguage: Country = Country.VIETNAM,
 
         @JsonProperty("preferred_currency")
         @JsonFormat(shape = JsonFormat.Shape.STRING)
-        val preferredCurrency: Currency
+        val preferredCurrency: Currency = Currency.VND
     )
 
     data class UpdatePasswordDTO(
@@ -70,10 +70,10 @@ interface AuthPort {
         @JsonProperty("email")
         @Email(message = "Email is not valid")
         @NotBlank(message = "Email is required")
-        val email: String,
+        val email: String = "",
         @JsonProperty("password")
         @NotBlank(message = "Password is required")
-        val password: String
+        val password: String = ""
     )
 
     data class VerifyUserDTO(

@@ -8,6 +8,7 @@ class AboutUsController {
     
     @GetMapping("/about-us")
     fun entryPoint(): String {
+        println("Hello")
         return "about-us"
     }
     

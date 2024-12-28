@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="/assets/css/vendor/base.css">
     <link rel="stylesheet" href="/assets/css/style.min.css">
 
+    <!--  Jquery   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 </head>
 
 
@@ -49,8 +52,8 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">English</a></li>
-                                    <li><a class="dropdown-item" href="#">Arabic</a></li>
-                                    <li><a class="dropdown-item" href="#">Spanish</a></li>
+                                    <li><a class="dropdown-item" href="#">Japanese</a></li>
+                                    <li><a class="dropdown-item" href="#">Vietnamese</a></li>
                                 </ul>
                             </div>
                             <div class="dropdown">
@@ -59,8 +62,8 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">USD</a></li>
-                                    <li><a class="dropdown-item" href="#">AUD</a></li>
-                                    <li><a class="dropdown-item" href="#">EUR</a></li>
+                                    <li><a class="dropdown-item" href="#">JPY</a></li>
+                                    <li><a class="dropdown-item" href="#">VND</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -865,7 +868,44 @@
     <script src="/assets/js/vendor/waypoints.min.js"></script>
 
     <!-- Main JS -->
-    <script src="/assets/js/main.js"></script>
+    
+    <script defer>
+        $(document).ready(function() {
+            $('.axil-contact-form').on('submit', function(e) {
+                e.preventDefault();
+                var _self = $(this);
+                var _selector = _self.closest('input,textarea');
+                _self.closest('div').find('input,textarea').removeAttr('style');
+                _self.find('.error-msg').remove();
+                _self.closest('div').find('button[type="submit"]').attr('disabled', 'disabled');
+                var data = $(this).serialize();
+                $.ajax({
+                    url: 'mail.php',
+                    type: "post",
+                    dataType: 'json',
+                    data: data,
+                    success: function(data) {
+                        _self.closest('div').find('button[type="submit"]').removeAttr('disabled');
+                        if (data.code == false) {
+                            _self.closest('div').find('[name="' + data.field + '"]');
+                            _self.find('.axil-btn').after('<div class="error-msg"><p>*' + data.err + '</p></div>');
+                        } else {
+                            $('.error-msg').hide();
+                            $('.form-group').removeClass('focused');
+                            _self.find('.axil-btn').after('<div class="success-msg"><p>' + data.success + '</p></div>');
+                            _self.closest('div').find('input,textarea').val('');
+
+                            setTimeout(function() {
+                                $('.success-msg').fadeOut('slow');
+                            }, 5000);
+                        }
+                    }
+                });
+            });
+        })
+    </script>
+    
+    <script src="/assets/js/main.js" defer></script>
 
 </body>
 
