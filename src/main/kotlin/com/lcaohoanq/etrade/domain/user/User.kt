@@ -18,11 +18,11 @@ import java.time.LocalDateTime
 data class User(
     @Column(name = "email", nullable = false, length = 100)
     @Email
-    var email: String = "default@example.com",
+    var email: String? = null,
 
-    @Column(name = "password", length = 200)
+    @Column(name = "password", nullable = false, length = 200)
     @JsonProperty("password")
-    var hashedPassword: String = "",
+    var hashedPassword: String? = null,
 
     var name: String? = null,
 
@@ -35,7 +35,7 @@ data class User(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    var status: UserStatus =  UserStatus.UNVERIFIED,
+    var status: UserStatus = UserStatus.UNVERIFIED,
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "activity_status")

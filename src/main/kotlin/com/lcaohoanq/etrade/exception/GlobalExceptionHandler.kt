@@ -27,8 +27,7 @@ import java.util.*
 
 @Slf4j
 @RestControllerAdvice
-class GlobalExceptionHandler(
-) {
+class GlobalExceptionHandler {
     private val logger = KotlinLogging.logger {}
 
     @ExceptionHandler(NoResourceFoundException::class)

@@ -38,8 +38,8 @@ class AuthService(
             throw MalformBehaviourException("Password and confirm password must be the same")
         }
 
-        var email = accountRegisterDTO.email
-        if (userRepository.existsByEmail(email)) {
+        val newEmail = accountRegisterDTO.email
+        if (userRepository.existsByEmail(newEmail)) {
             throw DataIntegrityViolationException(
                 "Email already exists"
             )
@@ -56,18 +56,18 @@ class AuthService(
         val acceptLanguage = request.getHeader("Accept-Language")
 
         var preferredLanguage = accountRegisterDTO.preferredLanguage
-            ?: if (acceptLanguage.isNullOrEmpty()) Country.UNITED_STATES
-            else Country.valueOf(acceptLanguage.uppercase())
 
-        var preferredCurrency = accountRegisterDTO.preferredCurrency ?: Currency.USD
-        var newUser = User().apply {
+        var preferredCurrency = accountRegisterDTO.preferredCurrency
+        val newUser = User().apply {
+            email = newEmail
             name = accountRegisterDTO.name
-            email = accountRegisterDTO.email
             hashedPassword = accountRegisterDTO.password
             phoneNumber = accountRegisterDTO.phoneNumber
             gender = accountRegisterDTO.gender
             dateOfBirth = accountRegisterDTO.dateOfBirth
         }
+
+        userRepository.save(newUser)
 
         val avatar = Avatar().apply {
             mediaMeta = MediaMeta()
@@ -76,6 +76,8 @@ class AuthService(
 
         // 4. Add avatar to user's avatar list
         newUser.avatars = listOf(avatar)
+        
+        userRepository.save(newUser)
 
         // 5. Create and save the wallet
         val newWallet = Wallet(user = newUser).let { walletRepository.save(it) }
@@ -87,17 +89,15 @@ class AuthService(
         return userRepository.save(newUser)
     }
 
-    override fun login(userLoginDTO: AuthPort.UserLoginDTO): AuthPort.LoginResponse {
+    override fun login(userLoginDTO: AuthPort.UserLoginDTO): Boolean {
         val user = userRepository.findByEmail(userLoginDTO.email)
-            ?.orElseThrow(({ DataNotFoundException("User not found") }))
+            .orElseThrow(({ DataNotFoundException("User not found") }))
 
         if (user?.hashedPassword != userLoginDTO.password) {
             throw DataNotFoundException("Password is incorrect")
         }
 
-        return AuthPort.LoginResponse(
-            user = userMapper.toUserResponse(user),
-        )
+        return true
     }
 
     override fun getUserDetailsFromToken(token: String): UserPort.UserResponse {

@@ -10,7 +10,7 @@ interface IAuthService {
     fun register(accountRegisterDTO: AuthPort.AccountRegisterDTO): User
 
     @Throws(Exception::class)
-    fun login(userLoginDTO: AuthPort.UserLoginDTO): AuthPort.LoginResponse
+    fun login(userLoginDTO: AuthPort.UserLoginDTO): Boolean
 
     @Throws(Exception::class)
     fun getUserDetailsFromToken(token: String): UserPort.UserResponse
