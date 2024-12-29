@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<html class="no-js" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Management</title>
+</head>
+<body>
+<h1>User Management</h1>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Email</th>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Phone Number</th>
+    <th>Role</th>
+    <th>Status</th>
+    <th>Is Active</th>
+    <th>Last Login</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.name}"></td>
+    <td th:text="${user.gender}"></td>
+    <td th:text="${user.phoneNumber}"></td>
+    <td th:text="${user.role}"></td>
+    <td th:text="${user.status}"></td>
+    <td th:text="${user.isActive} ? 'Yes' : 'No'"></td>
+    <td th:text="${#dates.format(user.lastLoginTimestamp, 'yyyy-MM-dd HH:mm')}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

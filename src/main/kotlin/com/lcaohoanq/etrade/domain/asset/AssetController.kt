@@ -1,12 +1,15 @@
 package com.lcaohoanq.etrade.domain.asset
 
 import com.lcaohoanq.etrade.domain.auth.AuthPort
+import com.lcaohoanq.etrade.domain.user.IUserService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class AssetController {
+class AssetController(
+    private val userService: IUserService
+) {
 
     @GetMapping("/test")
     fun test(): String {
@@ -209,6 +212,19 @@ class AssetController {
     @GetMapping("404")
     fun error404(): String {
         return "404"
+    }
+    
+    //management
+    @GetMapping("manage-users")
+    fun getUserManagements(model: Model): String {
+        val users = userService.getAllUsers() // Assume `userService` is your service to get all users.
+        model.addAttribute("users", users)
+        return "manage-users"
+    }
+
+    @GetMapping("manage-products")
+    fun getProductManagements(): String {
+        return "manage-products"
     }
 
 }
