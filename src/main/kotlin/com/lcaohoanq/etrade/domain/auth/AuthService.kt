@@ -4,13 +4,9 @@ import com.lcaohoanq.etrade.base.exception.DataNotFoundException
 import com.lcaohoanq.etrade.constant.Regex
 import com.lcaohoanq.etrade.domain.avatar.Avatar
 import com.lcaohoanq.etrade.domain.user.User
-import com.lcaohoanq.etrade.domain.user.UserMapper
-import com.lcaohoanq.etrade.domain.user.UserPort
-import com.lcaohoanq.etrade.domain.user.UserRepository
+import com.lcaohoanq.etrade.repository.UserRepository
 import com.lcaohoanq.etrade.domain.wallet.Wallet
 import com.lcaohoanq.etrade.domain.wallet.WalletRepository
-import com.lcaohoanq.etrade.enums.Country
-import com.lcaohoanq.etrade.enums.Currency
 import com.lcaohoanq.etrade.exception.MalformBehaviourException
 import com.lcaohoanq.etrade.exception.PasswordWrongFormatException
 import com.lcaohoanq.etrade.metadata.MediaMeta
@@ -19,14 +15,12 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
-import java.time.LocalDateTime
 import java.util.*
 
 @Service
 class AuthService(
     private val userRepository: UserRepository,
-    private val walletRepository: WalletRepository,
-    private val userMapper: UserMapper
+    private val walletRepository: WalletRepository
 ) : IAuthService {
     override fun register(accountRegisterDTO: AuthPort.AccountRegisterDTO): User {
         if (!accountRegisterDTO.password.matches(Regex.PASSWORD_REGEX.toRegex())) {
@@ -101,7 +95,7 @@ class AuthService(
         return true
     }
 
-    override fun getUserDetailsFromToken(token: String): UserPort.UserResponse {
+    override fun getUserDetailsFromToken(token: String): User {
         TODO("Not yet implemented")
     }
 

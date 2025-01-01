@@ -1,7 +1,6 @@
 package com.lcaohoanq.etrade.domain.auth
 
 import com.lcaohoanq.etrade.domain.user.User
-import com.lcaohoanq.etrade.domain.user.UserPort
 import java.util.*
 
 interface IAuthService {
@@ -13,7 +12,7 @@ interface IAuthService {
     fun login(userLoginDTO: AuthPort.UserLoginDTO): Boolean
 
     @Throws(Exception::class)
-    fun getUserDetailsFromToken(token: String): UserPort.UserResponse
+    fun getUserDetailsFromToken(token: String): User
 
     @Throws(Exception::class)
     fun logout(token: String, user: User)

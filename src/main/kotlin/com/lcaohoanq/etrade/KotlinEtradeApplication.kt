@@ -13,11 +13,11 @@ class KotlinEtradeApplication
 fun main(args: Array<String>) {
     runApplication<KotlinEtradeApplication>(*args)
     openHomePage()
+//    openHomePage("http://localhost:8080/swagger-ui/index.html")
 }
 
 @Throws(IOException::class)
-private fun openHomePage() {
-    val url = "http://localhost:8080/index-1"
+private fun openHomePage(url: String = "http://localhost:8080/index-1") {
     try {
         // Check if the desktop is supported and can open the default browser
         if (Desktop.isDesktopSupported()) {

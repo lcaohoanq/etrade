@@ -1,12 +1,8 @@
 package com.lcaohoanq.etrade.domain.auth
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonInclude.Include
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import com.lcaohoanq.etrade.constant.Regex
-import com.lcaohoanq.etrade.domain.user.UserPort
 import com.lcaohoanq.etrade.enums.Country
 import com.lcaohoanq.etrade.enums.Currency
 import com.lcaohoanq.etrade.enums.Gender
@@ -74,9 +70,5 @@ interface AuthPort {
     )
 
     data class ForgotPasswordResponse(val message: String)
-
-    data class LoginResponse(
-        val user: UserPort.UserResponse
-    )
 
 }

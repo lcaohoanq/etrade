@@ -1,5 +1,6 @@
-package com.lcaohoanq.etrade.domain.user
+package com.lcaohoanq.etrade.repository
 
+import com.lcaohoanq.etrade.domain.user.User
 import com.lcaohoanq.etrade.enums.UserRole
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

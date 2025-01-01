@@ -3,15 +3,13 @@ package com.lcaohoanq.etrade.domain.user
 import com.lcaohoanq.etrade.api.PageResponse
 import com.lcaohoanq.etrade.base.exception.DataNotFoundException
 import com.lcaohoanq.etrade.domain.auth.AuthPort.UpdatePasswordDTO
-import com.lcaohoanq.etrade.domain.user.UserPort.UpdateUserDTO
-import com.lcaohoanq.etrade.domain.user.UserPort.UserResponse
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 interface IUserService {
-    fun fetchUser(pageable: Pageable): PageResponse<UserResponse>
+    fun fetchUser(pageable: Pageable): PageResponse<User>
 
     @Throws(Exception::class)
     fun loginOrRegisterGoogle(
@@ -22,7 +20,7 @@ interface IUserService {
     ): String
 
     @Throws(DataNotFoundException::class)
-    fun findUserById(id: UUID): UserResponse
+    fun findUserById(id: UUID): User
 
     @Throws(DataNotFoundException::class)
     fun findUserByEmail(email: String): User
@@ -40,7 +38,7 @@ interface IUserService {
 
     @Transactional
     @Throws(Exception::class)
-    fun updateUser(userId: UUID, updatedUserDTO: UpdateUserDTO): User
+    fun updateUser(userId: UUID, updatedUserDTO: User): User
 
     @Throws(DataNotFoundException::class)
     fun bannedUser(userId: UUID)

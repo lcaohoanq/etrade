@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.*
 import com.lcaohoanq.etrade.base.entity.BaseEntity
 import com.lcaohoanq.etrade.domain.avatar.Avatar
 import com.lcaohoanq.etrade.domain.wallet.Wallet
-import com.lcaohoanq.etrade.enums.Gender
-import com.lcaohoanq.etrade.enums.UserRole
-import com.lcaohoanq.etrade.enums.UserStatus
+import com.lcaohoanq.etrade.enums.*
 import jakarta.persistence.*
 import jakarta.validation.constraints.Email
 import org.hibernate.envers.Audited
@@ -18,11 +16,11 @@ import java.time.LocalDateTime
 data class User(
     @Column(name = "email", nullable = false, length = 100)
     @Email
-    var email: String? = null,
+    var email: String = "",
 
     @Column(name = "password", nullable = false, length = 200)
     @JsonProperty("password")
-    var hashedPassword: String? = null,
+    var hashedPassword: String = "",
 
     var name: String? = null,
 
@@ -63,10 +61,10 @@ data class User(
     var role: UserRole = UserRole.MEMBER,
 
     @Column(name = "preferred_language")
-    var preferredLanguage: String? = null,
+    var preferredLanguage: Country? = null,
 
     @Column(name = "preferred_currency")
-    var preferredCurrency: String? = null,
+    var preferredCurrency: Currency? = null,
 
     @Column(name = "last_login_timestamp")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
