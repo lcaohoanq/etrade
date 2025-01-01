@@ -70,7 +70,7 @@ data class User(
 
     @Column(name = "last_login_timestamp")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
-    var lastLoginTimestamp: LocalDateTime? = null,
+    var lastLoginTimestamp: LocalDateTime = LocalDateTime.now(),
 ) : BaseEntity() {
 
     enum class ActivityStatus {

@@ -7,6 +7,8 @@
   <title>User Management</title>
 </head>
 <body>
+<a href="sign-in">Login</a>
+<a href="sign-up">Register</a>
 <h1>User Management</h1>
 
 <table border="1">
@@ -33,7 +35,7 @@
     <td th:text="${user.role}"></td>
     <td th:text="${user.status}"></td>
     <td th:text="${user.isActive} ? 'Yes' : 'No'"></td>
-    <td th:text="${#dates.format(user.lastLoginTimestamp, 'yyyy-MM-dd HH:mm')}"></td>
+    <td th:text="${user.lastLoginTimestamp ==null} ? 'N/A' : ${user.lastLoginTimestamp} "></td>
   </tr>
   </tbody>
 </table>

@@ -19,6 +19,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
+import java.time.LocalDateTime
 import java.util.*
 
 @Service
@@ -96,7 +97,7 @@ class AuthService(
         if (user?.hashedPassword != userLoginDTO.password) {
             throw DataNotFoundException("Password is incorrect")
         }
-
+        
         return true
     }
 
